@@ -317,7 +317,7 @@ amqp.connect("amqp://localhost", function (error0, connection) {
           );
           // console.log(" [x] Received %s", msg.content.toString());
           const sharesAccessSignature =
-            "SharedAccessSignature sr=testBulkMeterIotHub.azure-devices.net%2Fdevices%2FbulkMeter&sig=g1E4KJu8qErmyhUq0kabfIZUu9pKoeElaD0DaFIX5VU%3D&se=1615574543";
+            "SharedAccessSignature sr=testBulkMeterIotHub.azure-devices.net%2Fdevices%2FbulkMeter&sig=vv58zgYeIeboLncb%2FC41UKj6ud36qn1mG6EV6ogNuUw%3D&se=1628305176";
           if (
             deviceTelemetryLoginProduction &&
             clientAddressLoginFrameSend == "151314691661"
