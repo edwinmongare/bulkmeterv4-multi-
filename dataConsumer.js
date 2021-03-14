@@ -454,7 +454,7 @@ amqp.connect("amqp://localhost", function (error0, connection) {
                 "https://testBulkMeterIotHub.azure-devices.net/devices/bulkMeter/messages/events?api-version=2020-03-13",
                 {
                   device: "bulkMeter",
-                  data: deviceTelemetryLoginProduction,
+                  data: deviceTelemetryDataProduction,
                 },
                 {
                   headers: {
