@@ -311,7 +311,11 @@ amqp.connect("amqp://localhost", function (error0, connection) {
             clientAddressData: `${clientAddressLoginFrameSend}`,
             voltageData: voltageLoginFrameSendAnalysis,
             signalData: signalLoginFrameSendAnalysis,
-            collectingTimeData: `${new Date(dateslice).getDate}`,
+            collectingTimeData: `${new Date(dateslice).getDay}-${
+              new Date(dateslice).getMonth
+            }-${new Date(dateslice).getFullYear} ${
+              new Date(dateslice).getHours
+            }:${new Date(dateslice).getMinutes}`,
             reportingNetworkParametersECL: reportingNetworkParameterFrameSendECL,
             reportingNetworkParameterSNR: reportingNetworkParameterFrameSendSNRAnalysis,
             reportingNetworkParameterPCI: reportingNetworkParameterFrameSendPCIAnalysis,
