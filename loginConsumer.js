@@ -311,17 +311,17 @@ amqp.connect("amqp://localhost", function (error0, connection) {
             clientAddressData: `${clientAddressLoginFrameSend}`,
             voltageData: voltageLoginFrameSendAnalysis,
             signalData: signalLoginFrameSendAnalysis,
-            collectingTimeData: `${new Date(dateslice).getDay}-${
-              new Date(dateslice).getMonth
-            }-${new Date(dateslice).getFullYear} ${
-              new Date(dateslice).getHours
-            }:${new Date(dateslice).getMinutes}`,
+            collectingTimeData: `${new Date(dateslice).getDay}`,
             reportingNetworkParametersECL: reportingNetworkParameterFrameSendECL,
             reportingNetworkParameterSNR: reportingNetworkParameterFrameSendSNRAnalysis,
             reportingNetworkParameterPCI: reportingNetworkParameterFrameSendPCIAnalysis,
             reportingNetworkParameterEARFCN: reportingNetworkParameterFrameSendEARFCNAnalysis,
           };
-
+          // collectingTimeData: `${new Date(dateslice).getDay}-${
+          //   new Date(dateslice).getMonth
+          // }-${new Date(dateslice).getFullYear} ${
+          //   new Date(dateslice).getHours
+          // }:${new Date(dateslice).getMinutes}`,
           const deviceTelemetryJson = JSON.stringify(deviceTelemetry, null, 3);
           const deviceTelemetryLoginProduction = JSON.stringify(
             deviceTelemetry
