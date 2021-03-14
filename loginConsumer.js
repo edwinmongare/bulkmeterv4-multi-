@@ -311,7 +311,7 @@ amqp.connect("amqp://localhost", function (error0, connection) {
             clientAddressData: `${clientAddressLoginFrameSend}`,
             voltageData: voltageLoginFrameSendAnalysis,
             signalData: signalLoginFrameSendAnalysis,
-            collectingTimeData: `${new Date(dateslice)}`,
+            collectingTimeData: `${new Date(dateslice).getDate}`,
             reportingNetworkParametersECL: reportingNetworkParameterFrameSendECL,
             reportingNetworkParameterSNR: reportingNetworkParameterFrameSendSNRAnalysis,
             reportingNetworkParameterPCI: reportingNetworkParameterFrameSendPCIAnalysis,
