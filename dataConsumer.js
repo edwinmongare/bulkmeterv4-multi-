@@ -415,12 +415,7 @@ amqp.connect("amqp://localhost", function (error0, connection) {
             //*? data frame data
             clientAddressData: `${clientAddressDataFrameSend}`,
             alarmCodeData: `${alarmCodeDataFrameSendChoice}`,
-            // collectingTimeData:`${ new Date (finalTimeData).getTime}`
-            collectingTimeData: `${new Date(finalTimeData).getDay}-${
-              new Date(finalTimeData).getMonth
-            }-${new Date(finalTimeData).getFullYear} ${
-              new Date(finalTimeData).getHours
-            }:${new Date(finalTimeData).getMinutes}`,
+            collectingTimeData: `${new Date(finalTimeData).getTime}`,
             negativeCummilativeFlowData: negativeCummilativeFlowDataFrameSendAnalysis,
             negativeCummilativeRunningTimeData: negativeCummilativeRunningTimeDataFrameSendAnalysis,
             positiveCumulativeFlowData: positiveCumulativeFlowDataFrameSendAnalysis,
