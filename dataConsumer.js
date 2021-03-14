@@ -411,9 +411,23 @@ amqp.connect("amqp://localhost", function (error0, connection) {
             pressureData: pressureDataFrameSendAnalysis,
             diagnosticCodeData: `${diagnosticCodeDataFrameSendChoice}`,
           };
-
+          const deviceTelemetryCosmosDB = {
+            //*? data frame data
+            clientAddressData: `${clientAddressDataFrameSend}`,
+            alarmCodeData: `${alarmCodeDataFrameSendChoice}`,
+            collectingTimeData: `${new Date(finalTimeData)}`,
+            negativeCummilativeFlowData: negativeCummilativeFlowDataFrameSendAnalysis,
+            negativeCummilativeRunningTimeData: negativeCummilativeRunningTimeDataFrameSendAnalysis,
+            positiveCumulativeFlowData: positiveCumulativeFlowDataFrameSendAnalysis,
+            waterTemperatureData: waterTemperatureDataFrameSendAnalysis,
+            pressureData: pressureDataFrameSendAnalysis,
+            diagnosticCodeData: `${diagnosticCodeDataFrameSendChoice}`,
+          };
           const deviceTelemetryJson = JSON.stringify(deviceTelemetry, null, 3);
           const deviceTelemetryDataProduction = JSON.stringify(deviceTelemetry);
+          const deviceTelemetryCosmosDBProduction = JSON.stringify(
+            deviceTelemetryCosmosDB
+          );
           console.log(
             "production data (data frame): ",
             deviceTelemetryDataProduction
@@ -454,7 +468,7 @@ amqp.connect("amqp://localhost", function (error0, connection) {
                 "https://testBulkMeterIotHub.azure-devices.net/devices/bulkMeter/messages/events?api-version=2020-03-13",
                 {
                   device: "bulkMeter",
-                  data: deviceTelemetryDataProduction,
+                  data: deviceTelemetryCosmosDBProduction,
                 },
                 {
                   headers: {

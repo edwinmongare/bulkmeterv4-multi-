@@ -306,10 +306,24 @@ amqp.connect("amqp://localhost", function (error0, connection) {
             reportingNetworkParameterPCI: reportingNetworkParameterFrameSendPCIAnalysis,
             reportingNetworkParameterEARFCN: reportingNetworkParameterFrameSendEARFCNAnalysis,
           };
+          const deviceTelemetryLoginFrame = {
+            //*? login frame data
+            clientAddressData: `${clientAddressLoginFrameSend}`,
+            voltageData: voltageLoginFrameSendAnalysis,
+            signalData: signalLoginFrameSendAnalysis,
+            collectingTimeData: `${new Date(dateslice)}`,
+            reportingNetworkParametersECL: reportingNetworkParameterFrameSendECL,
+            reportingNetworkParameterSNR: reportingNetworkParameterFrameSendSNRAnalysis,
+            reportingNetworkParameterPCI: reportingNetworkParameterFrameSendPCIAnalysis,
+            reportingNetworkParameterEARFCN: reportingNetworkParameterFrameSendEARFCNAnalysis,
+          };
 
           const deviceTelemetryJson = JSON.stringify(deviceTelemetry, null, 3);
           const deviceTelemetryLoginProduction = JSON.stringify(
             deviceTelemetry
+          );
+          const deviceTelemetryLoginProductionCosmosDb = JSON.stringify(
+            deviceTelemetryLoginFrame
           );
           console.log(
             "production data (login frame): ",
@@ -352,7 +366,7 @@ amqp.connect("amqp://localhost", function (error0, connection) {
                 "https://testBulkMeterIotHub.azure-devices.net/devices/bulkMeter/messages/events?api-version=2020-03-13",
                 {
                   device: "bulkMeter",
-                  data: deviceTelemetryLoginProduction,
+                  data: deviceTelemetryLoginProductionCosmosDb,
                 },
                 {
                   headers: {
