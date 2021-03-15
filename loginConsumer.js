@@ -365,27 +365,28 @@ amqp.connect("amqp://localhost", function (error0, connection) {
                 }
               );
           } else {
-            axios
-              .post(
-                "https://testBulkMeterIotHub.azure-devices.net/devices/bulkMeter/messages/events?api-version=2020-03-13",
-                {
-                  device: "bulkMeter",
-                  data: deviceTelemetryLoginProductionCosmosDb,
-                },
-                {
-                  headers: {
-                    Authorization: `${sharesAccessSignature}`,
-                  },
-                }
-              )
-              .then(
-                (response) => {
-                  console.log("responseData Axios", response.status);
-                },
-                (error) => {
-                  console.log("errorData Axios", error);
-                }
-              );
+            console.log("not sending login frames to cosmos db");
+            //   axios
+            //     .post(
+            //       "https://testBulkMeterIotHub.azure-devices.net/devices/bulkMeter/messages/events?api-version=2020-03-13",
+            //       {
+            //         device: "bulkMeter",
+            //         data: deviceTelemetryLoginProductionCosmosDb,
+            //       },
+            //       {
+            //         headers: {
+            //           Authorization: `${sharesAccessSignature}`,
+            //         },
+            //       }
+            //     )
+            //     .then(
+            //       (response) => {
+            //         console.log("responseData Axios", response.status);
+            //       },
+            //       (error) => {
+            //         console.log("errorData Axios", error);
+            //       }
+            //     );
           }
         }
       },
