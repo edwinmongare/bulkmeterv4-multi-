@@ -176,7 +176,7 @@ amqp.connect("amqp://localhost", function (error0, connection) {
             6,
             8
           )}:${collectingTimeDataFrameSendAnalysis.slice(8, 10)}`;
-
+          const formattedDate = new Date(finalTimeData);
           // console.log("firtstSlice:", firtstSlice);
           // console.log(
           //   "collectingTimeDataFrameSendAnalysis:",
@@ -415,7 +415,7 @@ amqp.connect("amqp://localhost", function (error0, connection) {
             //*? data frame data
             clientAddressData: `${clientAddressDataFrameSend}`,
             alarmCodeData: `${alarmCodeDataFrameSendChoice}`,
-            collectingTimeData: `${new Date(finalTimeData).getDay}`,
+            collectingTimeData: `${formattedDate.toISOString()}`,
             negativeCummilativeFlowData: negativeCummilativeFlowDataFrameSendAnalysis,
             negativeCummilativeRunningTimeData: negativeCummilativeRunningTimeDataFrameSendAnalysis,
             positiveCumulativeFlowData: positiveCumulativeFlowDataFrameSendAnalysis,

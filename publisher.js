@@ -57,25 +57,47 @@ amqp.connect("amqp://localhost", function (error0, connection) {
           const messageData = Buffer.from(message, "ascii").toString("hex");
           let loginFrameClientAddress = messageData.slice(8, 20);
           if (messageData.slice(20, 22) == 01) {
-            await this.send(
-              (loginFrameReply = new Buffer.from(
-                `403A0009${loginFrameClientAddress}0100260D0A`,
-                "hex"
-              ).toString("ascii")),
-              remote.port,
-              remote.address,
-              function (err, bytes) {
-                if (err) throw err;
-                console.log(
-                  `Login Frame Reply Sent: ${Buffer.from(
-                    loginFrameReply,
-                    "ascii"
-                  ).toString("hex")} bytes: ${bytes} sent to ${
-                    remote.address
-                  }:${remote.port}`
-                );
-              }
-            );
+            if (messageData.slice(8, 20) == "151320592364") {
+              await this.send(
+                (loginFrameReply = new Buffer.from(
+                  `403A0009${loginFrameClientAddress}0100340D0A`,
+                  "hex"
+                ).toString("ascii")),
+                remote.port,
+                remote.address,
+                function (err, bytes) {
+                  if (err) throw err;
+                  console.log(
+                    `Login Frame Reply Sent: ${Buffer.from(
+                      loginFrameReply,
+                      "ascii"
+                    ).toString("hex")} bytes: ${bytes} sent to ${
+                      remote.address
+                    }:${remote.port}`
+                  );
+                }
+              );
+            } else {
+              await this.send(
+                (loginFrameReply = new Buffer.from(
+                  `403A0009${loginFrameClientAddress}0100260D0A`,
+                  "hex"
+                ).toString("ascii")),
+                remote.port,
+                remote.address,
+                function (err, bytes) {
+                  if (err) throw err;
+                  console.log(
+                    `Login Frame Reply Sent: ${Buffer.from(
+                      loginFrameReply,
+                      "ascii"
+                    ).toString("hex")} bytes: ${bytes} sent to ${
+                      remote.address
+                    }:${remote.port}`
+                  );
+                }
+              );
+            }
           } else if (messageData.slice(20, 22) == 08) {
             let dataframereplyPart = messageData.slice(24, 26);
             let dataframeClientAddress = messageData.slice(8, 20);
