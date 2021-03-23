@@ -124,6 +124,26 @@ amqp.connect("amqp://localhost", function (error0, connection) {
                   );
                 }
               );
+            } else if (messageData.slice(8, 20) == "151320592364") {
+              await this.send(
+                (dataSent = new Buffer.from(
+                  "403A000B15132059236408010100C30D0A",
+                  "hex"
+                ).toString("ascii")),
+                remote.port,
+                remote.address,
+                function (err, bytes) {
+                  if (err) throw err;
+                  console.log(
+                    `Data Frame Reply (temporary) Sent: ${Buffer.from(
+                      dataSent,
+                      "ascii"
+                    ).toString("hex")} bytes: ${bytes} sent to ${
+                      remote.address
+                    }:${remote.port}`
+                  );
+                }
+              );
             } else {
               await this.send(
                 (dataSent = new Buffer.from(
