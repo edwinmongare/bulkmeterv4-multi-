@@ -60,7 +60,7 @@ amqp.connect("amqp://localhost", function (error0, connection) {
             if (messageData.slice(8, 20) == "151320592364") {
               await this.send(
                 (loginFrameReply = new Buffer.from(
-                  `403A00091513205923640100260D0A`,
+                  `403A00091513205923640100320D0A`,
                   "hex"
                 ).toString("ascii")),
                 remote.port,
