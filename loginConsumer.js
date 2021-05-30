@@ -342,7 +342,7 @@ amqp.connect("amqp://localhost", function (error0, connection) {
             //**  post to http endpoint
             axios
               .post(
-                "https://1bahari2dev.azurewebsites.net/api/Admin/LoginTelemetry",
+                "https://bahari2dev.azurewebsites.net/api/Admin/LoginTelemetry",
                 deviceTelemetryLoginProduction,
 
                 {
