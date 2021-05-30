@@ -2,6 +2,7 @@ const amqp = require("amqplib/callback_api");
 const dgram = require("dgram");
 const PORT = 8011;
 const HOST = "0.0.0.0";
+const apiBase = require("./apiBase");
 
 amqp.connect("amqp://localhost", function (error0, connection) {
   if (error0) {
@@ -138,22 +139,47 @@ amqp.connect("amqp://localhost", function (error0, connection) {
             console.log("function code not 08 or 01");
           }
           const msg = messageData;
-          if (msg.slice(20, 22) == 01) {
-            channel.assertQueue(queueOne, {
-              durable: true,
+          let clientAddressArray = [];
+          clientAddressArray.push(`${loginFrameClientAddress}`);
+          console.log(clientAddressArray);
+
+          apiBase.api
+            .get("getMeterCodes")
+            .then(function (response) {
+              const meterCodes = response.data;
+              const result = meterCodes.map(function (obj) {
+                return obj.MeterCode;
+              });
+              // console.log(result, "results");
+
+              const filteredArray = result.filter((value) =>
+                clientAddressArray.includes(value)
+              );
+              if (filteredArray.length > 0) {
+                if (msg.slice(20, 22) == 01) {
+                  channel.assertQueue(queueOne, {
+                    durable: true,
+                  });
+                } else if (msg.slice(20, 22) == 08) {
+                  channel.assertQueue(queueTwo, {
+                    durable: true,
+                  });
+                }
+                if (msg.slice(20, 22) == 01) {
+                  channel.sendToQueue(queueOne, Buffer.from(msg));
+                } else if (msg.slice(20, 22) == 08) {
+                  channel.sendToQueue(queueTwo, Buffer.from(msg));
+                } else {
+                  console.log("msg slice not 01 or 08");
+                }
+              } else {
+                console.log("data not sent to queue");
+              }
+            })
+            .catch(function (error) {
+              console.log(error, "err");
             });
-          } else if (msg.slice(20, 22) == 08) {
-            channel.assertQueue(queueTwo, {
-              durable: true,
-            });
-          }
-          if (msg.slice(20, 22) == 01) {
-            channel.sendToQueue(queueOne, Buffer.from(msg));
-          } else if (msg.slice(20, 22) == 08) {
-            channel.sendToQueue(queueTwo, Buffer.from(msg));
-          } else {
-            console.log("msg slice not 01 or 08");
-          }
+
           // console.log(" message sent to  :", msg, "message length", msg.length);
         }.bind(server[i])
       );

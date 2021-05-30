@@ -84,10 +84,8 @@ amqp.connect("amqp://localhost", function (error0, connection) {
           // );
 
           // ** Total number of frames
-          const totalNumberofFramesDataFrameSend = intialPayloadDataFrameSend.slice(
-            22,
-            24
-          );
+          const totalNumberofFramesDataFrameSend =
+            intialPayloadDataFrameSend.slice(22, 24);
           // console.log(
           //   "totalNumberofFramesDataFrameSend:",
           //   totalNumberofFramesDataFrameSend
@@ -101,10 +99,8 @@ amqp.connect("amqp://localhost", function (error0, connection) {
           // console.log("whichframeDataFrameSend:", whichframeDataFrameSend);
 
           // ** Number of this frame table
-          const numberofThisFrameTableDataFrameSend = intialPayloadDataFrameSend.slice(
-            26,
-            28
-          );
+          const numberofThisFrameTableDataFrameSend =
+            intialPayloadDataFrameSend.slice(26, 28);
           // console.log(
           //   "numberofThisFrameTableDataFrameSend:",
           //   numberofThisFrameTableDataFrameSend
@@ -185,10 +181,8 @@ amqp.connect("amqp://localhost", function (error0, connection) {
           // console.log("collectingTimeDataFrameSend:", collectingTimeDataFrameSend);
 
           //** Meter reading data is valid
-          const meterReadingDataIsValidDataFrameSend = intialPayloadDataFrameSend.slice(
-            44,
-            46
-          );
+          const meterReadingDataIsValidDataFrameSend =
+            intialPayloadDataFrameSend.slice(44, 46);
           let meterReadingDataIsValidDataFrameSendAnalysis;
           if (meterReadingDataIsValidDataFrameSend === "26") {
             meterReadingDataIsValidDataFrameSendAnalysis =
@@ -207,10 +201,8 @@ amqp.connect("amqp://localhost", function (error0, connection) {
           // );
 
           // ** The instantaneous flow is negative
-          const instantaneousFlowIsNegativeDataFrameSend = intialPayloadDataFrameSend.slice(
-            46,
-            48
-          );
+          const instantaneousFlowIsNegativeDataFrameSend =
+            intialPayloadDataFrameSend.slice(46, 48);
           let instantaneousFlowIsNegativeDataFrameSendAnalysis;
           if (instantaneousFlowIsNegativeDataFrameSend === "00") {
             instantaneousFlowIsNegativeDataFrameSendAnalysis =
@@ -229,15 +221,14 @@ amqp.connect("amqp://localhost", function (error0, connection) {
           // );
 
           // ** Instantaneous flow
-          const instantaneousFlowDataFrameSend = intialPayloadDataFrameSend.slice(
-            48,
-            56
-          );
+          const instantaneousFlowDataFrameSend =
+            intialPayloadDataFrameSend.slice(48, 56);
           const instantaneousFlowDataFrameSendAnalysis =
             instantaneousFlowDataFrameSend / 1000;
           let instantaneousFlowDataFrameSendAnalysisFinal;
           if (instantaneousFlowIsNegativeDataFrameSend === "00") {
-            instantaneousFlowDataFrameSendAnalysisFinal = instantaneousFlowDataFrameSendAnalysis;
+            instantaneousFlowDataFrameSendAnalysisFinal =
+              instantaneousFlowDataFrameSendAnalysis;
           } else if (instantaneousFlowIsNegativeDataFrameSend === "0A") {
             instantaneousFlowDataFrameSendAnalysisFinal = `-${instantaneousFlowDataFrameSendAnalysis}`;
           }
@@ -252,10 +243,8 @@ amqp.connect("amqp://localhost", function (error0, connection) {
           // );
 
           // ** Negative cumulative flow
-          const negativeCummilativeFlowDataFrameSend = intialPayloadDataFrameSend.slice(
-            56,
-            64
-          );
+          const negativeCummilativeFlowDataFrameSend =
+            intialPayloadDataFrameSend.slice(56, 64);
           const negativeCummilativeFlowDataFrameSendAnalysis =
             negativeCummilativeFlowDataFrameSend / 10;
           // console.log(
@@ -268,10 +257,8 @@ amqp.connect("amqp://localhost", function (error0, connection) {
           // );
 
           // ** Negative cumulative running time
-          const negativeCummilativeRunningTimeDataFrameSend = intialPayloadDataFrameSend.slice(
-            64,
-            72
-          );
+          const negativeCummilativeRunningTimeDataFrameSend =
+            intialPayloadDataFrameSend.slice(64, 72);
           const negativeCummilativeRunningTimeDataFrameSendAnalysis =
             negativeCummilativeRunningTimeDataFrameSend * 1;
           // console.log(
@@ -284,10 +271,8 @@ amqp.connect("amqp://localhost", function (error0, connection) {
           // );
 
           // ** Positive cumulative flow
-          const positiveCumulativeFlowDataFrameSend = intialPayloadDataFrameSend.slice(
-            72,
-            80
-          );
+          const positiveCumulativeFlowDataFrameSend =
+            intialPayloadDataFrameSend.slice(72, 80);
           const positiveCumulativeFlowDataFrameSendAnalysis =
             (positiveCumulativeFlowDataFrameSend * 1) / 10;
           // console.log(
@@ -300,10 +285,8 @@ amqp.connect("amqp://localhost", function (error0, connection) {
           // );
 
           // ** Positive cumulative running time
-          const positiveCumulativeRunningTimeDataFrameSend = intialPayloadDataFrameSend.slice(
-            80,
-            88
-          );
+          const positiveCumulativeRunningTimeDataFrameSend =
+            intialPayloadDataFrameSend.slice(80, 88);
           const positiveCumulativeRunningTimeDataFrameSendAnalysis =
             positiveCumulativeRunningTimeDataFrameSend * 1;
           // console.log(
@@ -316,10 +299,8 @@ amqp.connect("amqp://localhost", function (error0, connection) {
           // );
 
           //** Water temperature
-          const waterTemperatureDataFrameSend = intialPayloadDataFrameSend.slice(
-            88,
-            96
-          );
+          const waterTemperatureDataFrameSend =
+            intialPayloadDataFrameSend.slice(88, 96);
           const waterTemperatureDataFrameSendAnalysis =
             (waterTemperatureDataFrameSend * 1) / 100;
           // console.log("waterTemperatureDataFrameSend:", waterTemperatureDataFrameSend);
@@ -404,9 +385,12 @@ amqp.connect("amqp://localhost", function (error0, connection) {
             clientAddressData: `${clientAddressDataFrameSend}`,
             alarmCodeData: `${alarmCodeDataFrameSendChoice}`,
             collectingTimeData: `${finalTimeData}`,
-            negativeCummilativeFlowData: negativeCummilativeFlowDataFrameSendAnalysis,
-            negativeCummilativeRunningTimeData: negativeCummilativeRunningTimeDataFrameSendAnalysis,
-            positiveCumulativeFlowData: positiveCumulativeFlowDataFrameSendAnalysis,
+            negativeCummilativeFlowData:
+              negativeCummilativeFlowDataFrameSendAnalysis,
+            negativeCummilativeRunningTimeData:
+              negativeCummilativeRunningTimeDataFrameSendAnalysis,
+            positiveCumulativeFlowData:
+              positiveCumulativeFlowDataFrameSendAnalysis,
             waterTemperatureData: waterTemperatureDataFrameSendAnalysis,
             pressureData: pressureDataFrameSendAnalysis,
             diagnosticCodeData: `${diagnosticCodeDataFrameSendChoice}`,
@@ -416,9 +400,12 @@ amqp.connect("amqp://localhost", function (error0, connection) {
             clientAddressData: `${clientAddressDataFrameSend}`,
             alarmCodeData: `${alarmCodeDataFrameSendChoice}`,
             collectingTimeData: `${formattedDate.toISOString()}`,
-            negativeCummilativeFlowData: negativeCummilativeFlowDataFrameSendAnalysis,
-            negativeCummilativeRunningTimeData: negativeCummilativeRunningTimeDataFrameSendAnalysis,
-            positiveCumulativeFlowData: positiveCumulativeFlowDataFrameSendAnalysis,
+            negativeCummilativeFlowData:
+              negativeCummilativeFlowDataFrameSendAnalysis,
+            negativeCummilativeRunningTimeData:
+              negativeCummilativeRunningTimeDataFrameSendAnalysis,
+            positiveCumulativeFlowData:
+              positiveCumulativeFlowDataFrameSendAnalysis,
             waterTemperatureData: waterTemperatureDataFrameSendAnalysis,
             pressureData: pressureDataFrameSendAnalysis,
             diagnosticCodeData: `${diagnosticCodeDataFrameSendChoice}`,
@@ -442,7 +429,7 @@ amqp.connect("amqp://localhost", function (error0, connection) {
             //**  post to http endpoint
             axios
               .post(
-                "https://bahari2dev.azurewebsites.net/api/Admin/ZonalMeterTelemetry",
+                "https://1bahari2dev.azurewebsites.net/api/Admin/ZonalMeterTelemetry",
                 deviceTelemetryDataProduction,
                 {
                   headers: {
@@ -465,7 +452,7 @@ amqp.connect("amqp://localhost", function (error0, connection) {
           } else {
             axios
               .post(
-                "https://testBulkMeterIotHub.azure-devices.net/devices/bulkMeter/messages/events?api-version=2020-03-13",
+                "https://1testBulkMeterIotHub.azure-devices.net/devices/bulkMeter/messages/events?api-version=2020-03-13",
                 {
                   device: "bulkMeter",
                   data: deviceTelemetryCosmosDBProduction,

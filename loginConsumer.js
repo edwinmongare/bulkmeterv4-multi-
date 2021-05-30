@@ -213,10 +213,8 @@ amqp.connect("amqp://localhost", function (error0, connection) {
           // console.log("meterSerialNumberFrameSend:", meterSerialNumberFrameSend);
 
           //**  Reporting network parameter
-          const reportingNetworkParameterFrameSend = intialPayloadLoginFrameSend.slice(
-            130,
-            148
-          );
+          const reportingNetworkParameterFrameSend =
+            intialPayloadLoginFrameSend.slice(130, 148);
 
           // *? Byte length
           const reportingNetworkParameterFrameSendBytes =
@@ -235,10 +233,8 @@ amqp.connect("amqp://localhost", function (error0, connection) {
           // );
 
           // *? SNR
-          const reportingNetworkParameterFrameSendSNR = reportingNetworkParameterFrameSend.slice(
-            8,
-            10
-          );
+          const reportingNetworkParameterFrameSendSNR =
+            reportingNetworkParameterFrameSend.slice(8, 10);
           const reportingNetworkParameterFrameSendSNRAnalysis = parseInt(
             reportingNetworkParameterFrameSendSNR,
             16
@@ -249,10 +245,8 @@ amqp.connect("amqp://localhost", function (error0, connection) {
           // );
 
           // *? PCI
-          const reportingNetworkParameterFrameSendPCI = reportingNetworkParameterFrameSend.slice(
-            12,
-            14
-          );
+          const reportingNetworkParameterFrameSendPCI =
+            reportingNetworkParameterFrameSend.slice(12, 14);
           const reportingNetworkParameterFrameSendPCIAnalysis = parseInt(
             reportingNetworkParameterFrameSendPCI,
             16
@@ -267,10 +261,8 @@ amqp.connect("amqp://localhost", function (error0, connection) {
           // );
 
           // *? EARFCN
-          const reportingNetworkParameterFrameSendEARFCN = reportingNetworkParameterFrameSend.slice(
-            15,
-            18
-          );
+          const reportingNetworkParameterFrameSendEARFCN =
+            reportingNetworkParameterFrameSend.slice(15, 18);
           const reportingNetworkParameterFrameSendEARFCNAnalysis = parseInt(
             reportingNetworkParameterFrameSendEARFCN,
             16
@@ -301,10 +293,14 @@ amqp.connect("amqp://localhost", function (error0, connection) {
             voltageData: voltageLoginFrameSendAnalysis,
             signalData: signalLoginFrameSendAnalysis,
             collectingTimeData: `${dateslice}`,
-            reportingNetworkParametersECL: reportingNetworkParameterFrameSendECL,
-            reportingNetworkParameterSNR: reportingNetworkParameterFrameSendSNRAnalysis,
-            reportingNetworkParameterPCI: reportingNetworkParameterFrameSendPCIAnalysis,
-            reportingNetworkParameterEARFCN: reportingNetworkParameterFrameSendEARFCNAnalysis,
+            reportingNetworkParametersECL:
+              reportingNetworkParameterFrameSendECL,
+            reportingNetworkParameterSNR:
+              reportingNetworkParameterFrameSendSNRAnalysis,
+            reportingNetworkParameterPCI:
+              reportingNetworkParameterFrameSendPCIAnalysis,
+            reportingNetworkParameterEARFCN:
+              reportingNetworkParameterFrameSendEARFCNAnalysis,
           };
           const deviceTelemetryLoginFrame = {
             //*? login frame data
@@ -312,10 +308,14 @@ amqp.connect("amqp://localhost", function (error0, connection) {
             voltageData: voltageLoginFrameSendAnalysis,
             signalData: signalLoginFrameSendAnalysis,
             collectingTimeData: `${new Date(dateslice).getDay}`,
-            reportingNetworkParametersECL: reportingNetworkParameterFrameSendECL,
-            reportingNetworkParameterSNR: reportingNetworkParameterFrameSendSNRAnalysis,
-            reportingNetworkParameterPCI: reportingNetworkParameterFrameSendPCIAnalysis,
-            reportingNetworkParameterEARFCN: reportingNetworkParameterFrameSendEARFCNAnalysis,
+            reportingNetworkParametersECL:
+              reportingNetworkParameterFrameSendECL,
+            reportingNetworkParameterSNR:
+              reportingNetworkParameterFrameSendSNRAnalysis,
+            reportingNetworkParameterPCI:
+              reportingNetworkParameterFrameSendPCIAnalysis,
+            reportingNetworkParameterEARFCN:
+              reportingNetworkParameterFrameSendEARFCNAnalysis,
           };
           // collectingTimeData: `${new Date(dateslice).getDay}-${
           //   new Date(dateslice).getMonth
@@ -323,9 +323,8 @@ amqp.connect("amqp://localhost", function (error0, connection) {
           //   new Date(dateslice).getHours
           // }:${new Date(dateslice).getMinutes}`,
           const deviceTelemetryJson = JSON.stringify(deviceTelemetry, null, 3);
-          const deviceTelemetryLoginProduction = JSON.stringify(
-            deviceTelemetry
-          );
+          const deviceTelemetryLoginProduction =
+            JSON.stringify(deviceTelemetry);
           const deviceTelemetryLoginProductionCosmosDb = JSON.stringify(
             deviceTelemetryLoginFrame
           );
@@ -343,7 +342,7 @@ amqp.connect("amqp://localhost", function (error0, connection) {
             //**  post to http endpoint
             axios
               .post(
-                "https://bahari2dev.azurewebsites.net/api/Admin/LoginTelemetry",
+                "https://1bahari2dev.azurewebsites.net/api/Admin/LoginTelemetry",
                 deviceTelemetryLoginProduction,
 
                 {
