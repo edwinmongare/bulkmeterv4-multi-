@@ -382,7 +382,7 @@ amqp.connect("amqp://localhost", function (error0, connection) {
           // console.log("stopBitDataFrameSend:", stopBitDataFrameSend);
           const deviceTelemetry = {
             //*? data frame data
-            payload: `${intialPayloadDataFrameSend}`,
+
             clientAddressData: `${clientAddressDataFrameSend}`,
             alarmCodeData: `${alarmCodeDataFrameSendChoice}`,
             collectingTimeData: `${finalTimeData}`,
@@ -398,6 +398,7 @@ amqp.connect("amqp://localhost", function (error0, connection) {
           };
           const deviceTelemetryCosmosDB = {
             //*? data frame data
+            payload: `${intialPayloadDataFrameSend}`,
             clientAddressData: `${clientAddressDataFrameSend}`,
             alarmCodeData: `${alarmCodeDataFrameSendChoice}`,
             collectingTimeData: `${formattedDate.toISOString()}`,
@@ -453,7 +454,7 @@ amqp.connect("amqp://localhost", function (error0, connection) {
           } else {
             axios
               .post(
-                "https://1testBulkMeterIotHub.azure-devices.net/devices/bulkMeter/messages/events?api-version=2020-03-13",
+                "https://testBulkMeterIotHub.azure-devices.net/devices/bulkMeter/messages/events?api-version=2020-03-13",
                 {
                   device: "bulkMeter",
                   data: deviceTelemetryCosmosDBProduction,
