@@ -139,32 +139,13 @@ amqp.connect("amqp://localhost", function (error0, connection) {
             console.log("function code not 08 or 01");
           }
           const msg = messageData;
-          let clientAddressArray = [];
-          clientAddressArray.push(`${loginFrameClientAddress}`);
-          console.log(clientAddressArray);
-
           apiBase.api
-            .get("getMeterCodes")
+            .get(`getMeterCode/${loginFrameClientAddress}`)
             .then(function (response) {
               const meterCodes = response.data;
-              const result = meterCodes.map(function (obj) {
-                return obj.MeterCode;
-              });
-              // console.log(result, "results");
-
-              const filteredArray = result.filter((value) =>
-                clientAddressArray.includes(value)
-              );
-              if (filteredArray.length > 0) {
-                if (msg.slice(20, 22) == 01) {
-                  channel.assertQueue(queueOne, {
-                    durable: true,
-                  });
-                } else if (msg.slice(20, 22) == 08) {
-                  channel.assertQueue(queueTwo, {
-                    durable: true,
-                  });
-                }
+              // console.log(meterCodes, "data from api");
+              // console.log(meterCodes.length, "array length");
+              if (meterCodes.length >= 1) {
                 if (msg.slice(20, 22) == 01) {
                   channel.sendToQueue(queueOne, Buffer.from(msg));
                 } else if (msg.slice(20, 22) == 08) {

@@ -382,6 +382,7 @@ amqp.connect("amqp://localhost", function (error0, connection) {
           // console.log("stopBitDataFrameSend:", stopBitDataFrameSend);
           const deviceTelemetry = {
             //*? data frame data
+            payload: `${intialPayloadDataFrameSend}`,
             clientAddressData: `${clientAddressDataFrameSend}`,
             alarmCodeData: `${alarmCodeDataFrameSendChoice}`,
             collectingTimeData: `${finalTimeData}`,
