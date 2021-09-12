@@ -424,10 +424,7 @@ amqp.connect("amqp://localhost", function (error0, connection) {
           // console.log(" [x] Received %s", msg.content.toString());
           const sharesAccessSignature =
             "SharedAccessSignature sr=testBulkMeterIotHub.azure-devices.net%2Fdevices%2FbulkMeter&sig=vv58zgYeIeboLncb%2FC41UKj6ud36qn1mG6EV6ogNuUw%3D&se=1628305176";
-          if (
-            deviceTelemetryDataProduction &&
-            clientAddressDataFrameSend == "151314691661"
-          ) {
+          if (deviceTelemetryDataProduction) {
             //**  post to http endpoint
             axios
               .post(
@@ -452,27 +449,28 @@ amqp.connect("amqp://localhost", function (error0, connection) {
                 }
               );
           } else {
-            axios
-              .post(
-                "https://testBulkMeterIotHub.azure-devices.net/devices/bulkMeter/messages/events?api-version=2020-03-13",
-                {
-                  device: "bulkMeter",
-                  data: deviceTelemetryCosmosDBProduction,
-                },
-                {
-                  headers: {
-                    Authorization: `${sharesAccessSignature}`,
-                  },
-                }
-              )
-              .then(
-                (response) => {
-                  console.log("responseData Axios", response.status);
-                },
-                (error) => {
-                  console.log("errorData Axios", error);
-                }
-              );
+            // axios
+            //   .post(
+            //     "https://testBulkMeterIotHub.azure-devices.net/devices/bulkMeter/messages/events?api-version=2020-03-13",
+            //     {
+            //       device: "bulkMeter",
+            //       data: deviceTelemetryCosmosDBProduction,
+            //     },
+            //     {
+            //       headers: {
+            //         Authorization: `${sharesAccessSignature}`,
+            //       },
+            //     }
+            //   )
+            //   .then(
+            //     (response) => {
+            //       console.log("responseData Axios", response.status);
+            //     },
+            //     (error) => {
+            //       console.log("errorData Axios", error);
+            //     }
+            //   );
+            console.log("not sending data frame to  cosmos");
           }
         }
       },
